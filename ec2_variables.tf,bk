@@ -1,0 +1,86 @@
+#variable "public_key_path" {
+#  description = "Public key path"
+#  default = "${path.module}/data/id_rsa.pub"
+#}
+
+variable "instance_Name_Ace" {
+  description = "Instance name of Ace"
+  default = ["Register", "CDH", "CNC", "GI", "EDMS", "REDMS"]
+}
+
+#instance_names
+
+variable "instances_name" {
+  description = "Instance name of Ace"
+  default = ["CDH", "CNC", "GI", "EDMS", "REDMS"]
+}
+
+variable "register" {
+  description = "Instance name of Ace"
+  default = ["APT"]
+}
+
+variable "kmskeyidforRoot" {
+    default=""
+
+}
+
+variable "volumneSizeforRoot" {
+    default=""
+
+}
+
+variable "volumneSize" {
+  default=""
+}
+
+
+variable "kmskeyid" {
+    default=""
+
+}
+
+variable "deleteonTermination" {
+  type        = string
+  default     = true
+  description = "Whether the data volume should be destroyed on instance termination"
+}
+
+variable "instanceType" {
+  default= ["t2.micro"]
+}
+
+variable "amiforlinuxjump" {
+  default="ami-0f7b1aca79154dddc"
+  
+}
+
+variable "amiforACE" {
+  default="ami-0f7b1aca79154dddc"
+  
+}
+
+#root volume for apt server
+variable "volumneSizeforAPT" {
+  default = 50
+
+}
+
+#AMI ID for APT server
+variable "amiforapt" {
+  default=""
+  
+}
+
+
+#Instance Type for APT Server
+variable "instanceAPT" {
+  default=""
+  
+}
+
+
+variable "nginxipaddr" {
+  default=""
+  
+}
