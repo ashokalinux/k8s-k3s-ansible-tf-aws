@@ -73,26 +73,9 @@ variable "destinationCIDRblock" {
   default = "0.0.0.0/0"
 }
 variable "ingressCIDRblock" {
-  #type    = "list"
- # default = ["203.115.125.148/32"]
   default = ["0.0.0.0/0"]
 }
 variable "mapPublicIP" {
   default = true
-}
-
-
-variable "servicename" {
-    default="secretsmanager"
-  
-}
-
-variable "endpointtype" {
-    default="Interface"
-  
-}
-
-variable "sg_id"{
-  default=["sg-04586d8ae35a3e2c2","sg-01044a372753883b8"]
 }
 

@@ -1,0 +1,15 @@
+---
+#- name: Playbook to copy a file
+- hosts: node1
+  become: true
+  user: ubuntu
+
+  tasks:
+#  - name: copy a file
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/node1.yml dest=/etc/kubernetes/node.yml
+
+  - command: "kubeadm join --config /etc/kubernetes/node.yml"
+    register: output
+    ignore_errors: yes
+  - debug:
+       var: output.stdout_lines

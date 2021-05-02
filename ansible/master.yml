@@ -1,0 +1,39 @@
+---
+#- name: "Playbook to bootstrap master node"
+- hosts: master
+  become: true
+  user: ubuntu
+
+  tasks:
+#   - name: "copy a file"
+   - copy: src=/root/working-code/my-demo-cluster-tag/ansible/aws.yml dest=/etc/kubernetes/aws.yml
+
+# Initialing Master
+#   - name: "Initializing Master"
+   - command: "kubeadm init --config /etc/kubernetes/aws.yml"
+     register: output
+     ignore_errors: yes
+   - debug:
+       var: output.stdout_lines
+
+# Creating the .kube directory
+   - name: "Creating .kube directory"
+     shell: "mkdir -p $HOME/.kube"
+
+# Copying the /etc/k8s/admin.conf to $HOME/.kube/config
+   - name: "Copying /etc/kubernetes/admin.conf $HOME/.kube/config"
+     shell: "sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config"
+
+# Changing the owner permission of $HOME/.kube/config
+   - name: "changing owner permission"
+     shell: "chown ubuntu:ubuntu $HOME/.kube/config"
+
+#install the Flannel  NetWork for the Communication
+   - name: flannel run
+     shell: "kubectl apply  -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml"
+
+   - name: create token
+     shell: "kubeadm token create  --print-join-command"
+     register: token_cr
+   - debug:
+      var: token_cr.stdout

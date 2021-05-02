@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bank
+  name: bank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bank
+    spec:
+      containers:
+      - image: zanakabhijit/digital-bank:digital_sample-app_v2.0
+        name: digital-bank

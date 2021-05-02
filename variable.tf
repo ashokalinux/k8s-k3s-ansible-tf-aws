@@ -24,7 +24,7 @@ variable "key_pair" {
 
 variable "instances_name" {
   description = "Instance name of K8s"
-  default = ["Master", "node1", "node3" ]
+  default = ["Master", "node1", "node2" ]
 }
 
 variable "instanceType" {

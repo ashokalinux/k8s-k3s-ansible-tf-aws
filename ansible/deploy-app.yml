@@ -1,0 +1,39 @@
+---
+#- name: Playbook to copy a file
+- hosts: master
+  become: true
+  user: ubuntu
+
+  tasks:
+#  - name: copy a file
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/aws.yml dest=/etc/kubernetes/aws.yml
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/ingress.yaml dest=/root/
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/haproxy-ingress.yaml dest=/root/
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/bank-service.yml dest=/root/
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/bank-deployment.yml dest=/root/
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/nginx-deployment.yml dest=/root/
+  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/nginx-service.yml dest=/root/
+
+  - name: create deployment of sample nginx app and tomcat(bank) app
+    shell: "{{item}}"
+    with_items:
+              - kubectl apply -f /root/bank-deployment.yml
+              - kubectl apply -f /root/bank-service.yml
+              - kubectl apply -f /root/nginx-deployment.yml
+              - kubectl apply -f /root/nginx-service.yml
+
+  - command: "kubectl apply -f /root/haproxy-ingress.yaml"
+    register: output
+  - debug:
+       var: output.stdout_lines
+
+
+  - command: "kubectl apply -f /root/ingress.yml"
+    register: output
+  - debug:
+       var: output.stdout
+
+  - command: "kubectl get all -n default -n haproxy-controller"
+    register: output
+  - debug:
+       var: output.stdout_lines
