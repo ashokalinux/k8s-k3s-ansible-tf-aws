@@ -1,3 +1,22 @@
+
+Tools used 
+--------------------------
+@AWS Cloud - infrasture platform
+
+@Terraform - infrasture code
+
+ -tfswitch - for version of terraform
+ 
+ -terratag - for tagging resources
+ 
+ -terra-doc - for generating README creation
+ 
+@ansible - configuration management 
+
+@k8s - kubernetes (kubeadm)
+  -sample web apps exposed to external word using haproxy ingress controller
+
+
 ## Requirements
 
 | Name | Version |
