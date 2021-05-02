@@ -11,7 +11,7 @@ Tools used
  
  -terra-doc - for generating README creation
  
-@ansible - configuration management 
+@Ansible - configuration management 
 
 @k8s - kubernetes (kubeadm)
   -sample web apps exposed to external word using haproxy ingress controller
