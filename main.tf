@@ -8,9 +8,9 @@ terraform {
 
 required_version = "~> v0.15.0" # is equivalent to >= 0.15.0,
 
-  required_providers {
-    aws = "~> 3.37.0"
-  }
+#  required_providers {
+#    aws = "~> 3.37.0"
+#  }
 
 
   ##################################################

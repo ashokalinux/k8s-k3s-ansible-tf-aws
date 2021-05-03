@@ -31,3 +31,9 @@ variable "instanceType" {
   default= ["t3a.medium","t2.micro","t2.micro"]
 }
 
+#####k3s demo
+variable "instances_name_k3" {
+  description = "Instance name of K3s"
+  default = ["K3-Master"]
+}
+

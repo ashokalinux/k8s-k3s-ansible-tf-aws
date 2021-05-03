@@ -1,13 +1,20 @@
 ---
 #- name: Playbook to copy a file
-- hosts: master
+- hosts: K3SMaster
   become: true
   user: ubuntu
 
   tasks:
+#k3s master install
+
+  - name: install k3s binaries
+    ansible.builtin.git: 
+      repo: "https://github.com/haproxytech/kubernetes-ingress.git"
+      dest: /root/kubernetes-ingress
+
 #  - name: copy a file
   - copy: src=/root/working-code/my-demo-cluster-tag/ansible/ingress.yml dest=/root/
-  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/haproxy-ingress.yaml dest=/root/
+    #  - copy: src=/root/working-code/my-demo-cluster-tag/ansible/haproxy-ingress.yaml dest=/root/
   - copy: src=/root/working-code/my-demo-cluster-tag/ansible/bank-service.yml dest=/root/
   - copy: src=/root/working-code/my-demo-cluster-tag/ansible/bank-deployment.yml dest=/root/
   - copy: src=/root/working-code/my-demo-cluster-tag/ansible/nginx-deployment.yml dest=/root/
@@ -21,7 +28,7 @@
               - kubectl apply -f /root/nginx-deployment.yml
               - kubectl apply -f /root/nginx-service.yml
 
-  - command: "kubectl apply -f /root/haproxy-ingress.yaml"
+  - command: "kubectl apply -f /root/kubernetes-ingress/deploy/haproxy-ingress.yaml"
     register: output
   - debug:
        var: output.stdout_lines
