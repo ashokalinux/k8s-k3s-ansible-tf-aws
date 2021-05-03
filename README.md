@@ -13,7 +13,7 @@ Tools used
 
 @Ansible - configuration management
 
-@k8s - kubernetes (kubeadm)
+@k8s - kubernetes (kubeadm) and @k3s 
   -sample web apps exposed to external word using haproxy ingress controller
 
 
